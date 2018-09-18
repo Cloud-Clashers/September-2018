@@ -7,8 +7,11 @@ using XInputDotNetPure;
 public class CloudClashersPauseGame : MonoBehaviour 
 {
 	public GameObject PauseBackground;
+	public GameObject ResetBackground;
 
 	public GameObject Reset;
+	public GameObject Resetyes;
+	public GameObject Resetno;
 	public GameObject CharacterSelect;
 	public GameObject Charyes;
 	public GameObject Charno;
@@ -19,9 +22,10 @@ public class CloudClashersPauseGame : MonoBehaviour
 	public int totalLevels = 4;
 	public float yOffset = 1f;
 
+	bool playerIndexSet = false;
+	PlayerIndex playerIndex;
 	GamePadState state;
 	GamePadState prevState;
-
 
 	private bool paused = false;
 
@@ -34,6 +38,25 @@ public class CloudClashersPauseGame : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+
+		if (!playerIndexSet || !prevState.IsConnected)
+		{
+			for (int i = 0; i < 4; ++i)
+			{
+				PlayerIndex testPlayerIndex = (PlayerIndex)i;
+				GamePadState testState = GamePad.GetState(testPlayerIndex);
+				if (testState.IsConnected)
+				{
+					Debug.Log(string.Format("GamePad found {0}", testPlayerIndex));
+					playerIndex = testPlayerIndex;
+					playerIndexSet = true;
+				}
+			}
+		}
+
+		prevState = state;
+		state = GamePad.GetState(playerIndex);
+
 		if (Input.GetButtonDown ("Pause") ) 
 		{
 			if (paused) 
@@ -58,7 +81,7 @@ public class CloudClashersPauseGame : MonoBehaviour
 			}
 		} 
 			
-		if (Input.GetKeyDown (KeyCode.DownArrow) || prevState.DPad.Down == ButtonState.Released && state.DPad.Down == ButtonState.Pressed )
+		if (Input.GetKeyDown (KeyCode.DownArrow) || prevState.DPad.Down == ButtonState.Pressed && state.DPad.Down == ButtonState.Released )
 		{
 			if (menuindex < totalLevels - 1) 
 			{
@@ -69,7 +92,7 @@ public class CloudClashersPauseGame : MonoBehaviour
 			}
 		}
 
-		if (Input.GetKeyDown (KeyCode.UpArrow) || prevState.DPad.Up == ButtonState.Released && state.DPad.Up == ButtonState.Pressed )
+		if (Input.GetKeyDown (KeyCode.UpArrow) || prevState.DPad.Up == ButtonState.Pressed && state.DPad.Up == ButtonState.Released )
 		{
 			if (menuindex > 0) 
 			{
@@ -84,6 +107,7 @@ public class CloudClashersPauseGame : MonoBehaviour
 		{
 			
 			Reset.SetActive (true);
+			ResetBackground.SetActive (false);
 			CharacterSelect.SetActive (false);
 			Options.SetActive (false);
 			Quit.SetActive (false);
@@ -126,9 +150,11 @@ public class CloudClashersPauseGame : MonoBehaviour
 			
 			if (Input.GetButtonDown ("P1A") && menuindex == 0) 
 			{
-				
-				Application.LoadLevel (Application.loadedLevel);
-				Resume ();
+
+				ResetBackground.SetActive (true);
+
+				//Application.LoadLevel (Application.loadedLevel);
+				//Resume ();
 
 			}
 			

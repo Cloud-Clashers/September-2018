@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using XInputDotNetPure;
 
 public class ButtonNavigation : MonoBehaviour 
 {
@@ -13,13 +14,34 @@ public class ButtonNavigation : MonoBehaviour
 	public AudioSource Audio;
 	public AudioClip Navigate;
 
-	
+	bool playerIndexSet = false;
+	PlayerIndex playerIndex;
+	GamePadState state;
+	GamePadState prevState;
+
 	// Update is called once per frame
 	void Update () 
 	{
-		float moveVertical = Input.GetAxisRaw ("Dpad");
+		if (!playerIndexSet || !prevState.IsConnected)
+		{
+			for (int i = 0; i < 4; ++i)
+			{
+				PlayerIndex testPlayerIndex = (PlayerIndex)i;
+				GamePadState testState = GamePad.GetState(testPlayerIndex);
+				if (testState.IsConnected)
+				{
+					Debug.Log(string.Format("GamePad found {0}", testPlayerIndex));
+					playerIndex = testPlayerIndex;
+					playerIndexSet = true;
+				}
+			}
+		}
 
-		if (Input.GetKeyDown (KeyCode.DownArrow) || moveVertical < 0 )
+		prevState = state;
+		state = GamePad.GetState(playerIndex);
+
+
+		if (Input.GetKeyDown (KeyCode.DownArrow) || prevState.DPad.Down == ButtonState.Pressed && state.DPad.Down == ButtonState.Released )
 		{
 			Audio.PlayOneShot(Navigate);
 			
@@ -33,7 +55,7 @@ public class ButtonNavigation : MonoBehaviour
 
 		}
 
-		if (Input.GetKeyDown (KeyCode.UpArrow) || moveVertical > 0 )
+		if (Input.GetKeyDown (KeyCode.UpArrow) || prevState.DPad.Up == ButtonState.Pressed && state.DPad.Up == ButtonState.Released )
 		{
 			Audio.PlayOneShot(Navigate);
 
