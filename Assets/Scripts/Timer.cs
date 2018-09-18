@@ -20,7 +20,10 @@ public class Timer : MonoBehaviour
 	public GameObject Timerp2Round1Win;
 	public GameObject Timerp2Round2Win;
 
-	int p1score = ScoreManager.scoreP1;
+    public GameObject P1WinAnimation;
+    public GameObject P2WinAnimation;
+
+    int p1score = ScoreManager.scoreP1;
 	int p2score = ScoreManager.scoreP2;
 
 	private ScoreManager scoremanager;
@@ -80,9 +83,11 @@ public class Timer : MonoBehaviour
 				
 				ScoreManager.P1win2 = true;
 
-				SceneManager.LoadScene ("Main Menu");
+                P1WinAnimation.SetActive(true);
 
-				resetTime ();
+                StartCoroutine(WinTimer());
+
+                resetTime ();
 
 			}
 		}
@@ -114,9 +119,11 @@ public class Timer : MonoBehaviour
 
 				ScoreManager.P2win2 = true;
 
-				SceneManager.LoadScene ("Main Menu");
+                P2WinAnimation.SetActive(true);
 
-				resetTime ();
+                StartCoroutine(WinTimer());
+
+                resetTime ();
 
 			}
 		}
@@ -124,8 +131,7 @@ public class Timer : MonoBehaviour
 		if (Timecounter < 1) 
 		{
 			if (p2score == p1score) 
-			{
-				
+			{	
 
 				resetTime ();
 
@@ -136,9 +142,16 @@ public class Timer : MonoBehaviour
 
 	}
 
+    private IEnumerator WinTimer()
+    {
 
+        yield return new WaitForSecondsRealtime(5);
 
-	public void resetTime ()
+        SceneManager.LoadScene("Main Menu");
+
+    }
+
+    public void resetTime ()
 	{
 
 		Timecounter = startingtime;

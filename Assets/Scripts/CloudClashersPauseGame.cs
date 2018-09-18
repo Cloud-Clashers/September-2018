@@ -7,14 +7,9 @@ using XInputDotNetPure;
 public class CloudClashersPauseGame : MonoBehaviour 
 {
 	public GameObject PauseBackground;
-	public GameObject ResetBackground;
 
 	public GameObject Reset;
-	public GameObject Resetyes;
-	public GameObject Resetno;
 	public GameObject CharacterSelect;
-	public GameObject Charyes;
-	public GameObject Charno;
 	public GameObject Options;
 	public GameObject Quit;
 
@@ -107,7 +102,6 @@ public class CloudClashersPauseGame : MonoBehaviour
 		{
 			
 			Reset.SetActive (true);
-			ResetBackground.SetActive (false);
 			CharacterSelect.SetActive (false);
 			Options.SetActive (false);
 			Quit.SetActive (false);
@@ -151,10 +145,8 @@ public class CloudClashersPauseGame : MonoBehaviour
 			if (Input.GetButtonDown ("P1A") && menuindex == 0) 
 			{
 
-				ResetBackground.SetActive (true);
-
-				//Application.LoadLevel (Application.loadedLevel);
-				//Resume ();
+				Application.LoadLevel (Application.loadedLevel);
+				Resume ();
 
 			}
 			

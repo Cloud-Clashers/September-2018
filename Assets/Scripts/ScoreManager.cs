@@ -23,7 +23,10 @@ public class ScoreManager : MonoBehaviour {
 	public GameObject P2Round1Win;
 	public GameObject P2Round2Win;
 
-	float time = Timer.Timecounter;
+    public GameObject P1WinAnimation;
+    public GameObject P2WinAnimation;
+
+    float time = Timer.Timecounter;
 
 
 	// Use this for initialization
@@ -61,6 +64,8 @@ public class ScoreManager : MonoBehaviour {
 
 			scoreP2 = 0;
 
+            Timer.Timecounter = 60;
+
 			P1Round1Win.SetActive (true);
 		}
 
@@ -69,6 +74,10 @@ public class ScoreManager : MonoBehaviour {
 			Debug.Log ("Player 1 Wins");
 
 			P1Round2Win.SetActive (true);
+
+            P1WinAnimation.SetActive(true);
+
+            StartCoroutine(WinTimer());
 
 			SceneManager.LoadScene ("Main Menu");
 		}
@@ -85,7 +94,9 @@ public class ScoreManager : MonoBehaviour {
 
 			scoreP2 = 0;
 
-			P2Round1Win.SetActive (true);
+            Timer.Timecounter = 60;
+
+            P2Round1Win.SetActive (true);
 		}
 
 		if (scoreP2 == 5 && P2win1 == true) 
@@ -100,9 +111,20 @@ public class ScoreManager : MonoBehaviour {
 
 
 	}
-		
-		
-	public static void P1AddPoints (int pointsToAdd)
+
+    private IEnumerator WinTimer()
+    {
+
+        yield return new WaitForSecondsRealtime(5);
+
+        SceneManager.LoadScene("Main Menu");
+
+
+
+    }
+
+
+    public static void P1AddPoints (int pointsToAdd)
 	{
 		scoreP1 += pointsToAdd;
 	}
