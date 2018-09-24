@@ -8,7 +8,7 @@ public class ButtonNavigation : MonoBehaviour
 {
 
 	int index = 0;
-	public int totalLevels = 3;
+	public int totalLevels = 4;
 	public float yOffset = 1f;
 
 	public AudioSource Audio;
@@ -75,12 +75,17 @@ public class ButtonNavigation : MonoBehaviour
 				SceneManager.LoadScene ("Character Select");
 			}
 
-			if (index == 1) 
+            if (index == 1)
+            {
+                SceneManager.LoadScene("4 Player Character Select");
+            }
+
+            if (index == 2) 
 			{
 				SceneManager.LoadScene ("Tutorial");
 			}
 
-			if (index == 2) 
+			if (index == 3) 
 			{
 				Application.Quit();
 			}

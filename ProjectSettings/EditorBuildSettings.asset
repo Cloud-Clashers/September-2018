@@ -12,8 +12,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Character select.unity
     guid: 429b0ea470c43fd408f9948bac3452ad
   - enabled: 1
-    path: Assets/Scenes/Tutorial.unity
-    guid: b1761cf68f43b1e42ac382b7f979dbe6
+    path: Assets/Scenes/4 Player Character select.unity
+    guid: f40765d8cf7949841868efc01431684f
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: d14ec9effbb90d848aab5adb9358a978
+  - enabled: 1
+    path: Assets/Scenes/Game (Four player).unity
+    guid: 6e118c32c208b7f49ab83df786a0ed46
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: b1761cf68f43b1e42ac382b7f979dbe6
+  m_configObjects: {}
