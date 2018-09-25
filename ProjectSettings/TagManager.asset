@@ -13,6 +13,8 @@ TagManager:
   - Ignore
   - Bullet
   - Music
+  - Goal3
+  - Goal4
   layers:
   - Default
   - TransparentFX

@@ -133,4 +133,14 @@ public class ScoreManager : MonoBehaviour {
 	{
 		scoreP2 += pointsToAdd;
 	}
+
+    public static void P3AddPoints(int pointsToAdd)
+    {
+        scoreP2 += pointsToAdd;
+    }
+
+    public static void P4AddPoints(int pointsToAdd)
+    {
+        scoreP2 += pointsToAdd;
+    }
 }

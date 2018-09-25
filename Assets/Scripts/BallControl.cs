@@ -111,7 +111,7 @@ public class BallControl : MonoBehaviour
 		
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.gameObject.name == "Goal1" || other.gameObject.tag == "Goal2") 
+        if (other.gameObject.name == "Goal1" || other.gameObject.tag == "Goal2" || other.gameObject.name == "Goal3" || other.gameObject.name == "Goal4" ) 
 		{
 
 			StartCoroutine (Destroy());

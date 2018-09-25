@@ -16,7 +16,7 @@ public class CharacterConfirm : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-        if (Application.loadedLevelName == "Character Select")
+        if (SceneManager.GetActiveScene().name == "Character select")
         {
 
             if (PlayerSelection.P1Ok == true && PlayerSelectionP2.P2Ok == true)
@@ -26,7 +26,7 @@ public class CharacterConfirm : MonoBehaviour
 
         }
 
-        if (Application.loadedLevelName == "4 Player Character Select" )
+        if (SceneManager.GetActiveScene().name == "4 Player Character select" )
         {
 
             if (PlayerSelection.P1Ok == true && PlayerSelectionP2.P2Ok == true && PlayerSelectionP3.P3Ok == true && PlayerSelectionP4.P4Ok == true)

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using XInputDotNetPure;
+using UnityEngine.SceneManagement;
 
 public class ControllerP2 : MonoBehaviour 
 {
@@ -124,168 +125,180 @@ public class ControllerP2 : MonoBehaviour
 
 		if (playerIndex == PlayerIndex.Two) 
 		{
-			
-			float moveHorizontal = state.ThumbSticks.Left.X * P2Speed * Time.deltaTime;
-			float moveVertical = state.ThumbSticks.Left.Y * P2Speed * Time.deltaTime;
 
-			this.transform.Translate (new Vector3 (moveHorizontal, moveVertical,0f));
+            if (SceneManager.GetActiveScene().name == "Game (Four player)")
+            {
 
-			if (p2power == 0) 
-			{
-				
-				dash = true;
+                float moveHorizontal = 0;
+                float moveVertical = state.ThumbSticks.Left.Y * P2Speed * Time.deltaTime;
 
-			}
+                this.transform.Translate(new Vector3(moveHorizontal, moveVertical, 0f));
 
-			if (p2power == 1) 
-			{
-				
-				shield = true;
+            }
 
-			}
+            if (SceneManager.GetActiveScene().name == "Game (Four player)")
+            {
+                float moveHorizontal = state.ThumbSticks.Left.X * P2Speed * Time.deltaTime;
+                float moveVertical = state.ThumbSticks.Left.Y * P2Speed * Time.deltaTime;
 
-			if (p2power == 2) 
-			{
-				
-				BigShot = true; 
+                this.transform.Translate(new Vector3(moveHorizontal, moveVertical, 0f));
 
-			}
+                if (p2power == 0)
+                {
 
+                    dash = true;
 
-			if (dash == true) 
-			{
-			
-				switch (dashState) 
-				{
-				case DashState.Ready:
-					var isDashKeyDown = prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed;
-					if (isDashKeyDown) 
-					{
-						P2savedSpeed = P2Speed;
-						P2Speed = P2Speed + 400;
+                }
 
-						DashIcon.SetActive (false);
-						DashIconCharging.SetActive (true);
+                if (p2power == 1)
+                {
 
-						dashState = DashState.Dashing;
-					}
-					break;
-				case DashState.Dashing:
-					dashTimer += Time.deltaTime * 3;
-					if (dashTimer >= maxDash) 
-					{
-						dashTimer = maxDash;
-						P2Speed = P2savedSpeed;
-						dashState = DashState.Cooldown;
-					}
-					break;
-				case DashState.Cooldown:
-					dashTimer -= Time.deltaTime;
-					if (dashTimer <= 0) 
-					{
-						dashTimer = 0;
+                    shield = true;
 
-						DashIcon.SetActive (true);
-						DashIconCharging.SetActive (false);
+                }
 
-						dashState = DashState.Ready;
-					}
-					break;
-				}
+                if (p2power == 2)
+                {
 
-			}
+                    BigShot = true;
 
-			if (shield == true) 
-			{
-				switch (shieldState) 
-				{
-				case P2ShieldState.Ready:
-					var P2ShieldKeyDown = prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed;
-					if (P2ShieldKeyDown) 
-					{
-						P2Shield.SetActive (true);
-
-						ShieldIcon.SetActive (false);
-						ShieldIconCharging.SetActive (true);
-
-						shieldState = P2ShieldState.Shielding;
-					}
-					break;
-				case P2ShieldState.Shielding:
-					shieldTimer += Time.deltaTime * 3;
-					if (shieldTimer >= maxShield) 
-					{
-						shieldTimer = maxShield;
-
-						P2Shield.SetActive (false);
-
-						shieldState = P2ShieldState.Cooldown;
-					}
-					break;
-				case P2ShieldState.Cooldown:
-					shieldTimer -= Time.deltaTime;
-					if (shieldTimer <= 0) 
-					{
-						shieldTimer = 0;
-
-						ShieldIcon.SetActive (true);
-						ShieldIconCharging.SetActive (false);
+                }
 
 
-						shieldState = P2ShieldState.Ready;
-					}
-					break;
-				}
-			}
+                if (dash == true)
+                {
 
-			if (BigShot == true) 
-			{
-				switch (shootState) 
-				{
-				case ShootState.Ready:
-					var P1CloneKeyDown = prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed;
-					if (P1CloneKeyDown) 
-					{
+                    switch (dashState)
+                    {
+                        case DashState.Ready:
+                            var isDashKeyDown = prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed;
+                            if (isDashKeyDown)
+                            {
+                                P2savedSpeed = P2Speed;
+                                P2Speed = P2Speed + 400;
 
-						BigShotIcon.SetActive (false);
-						BigShotIconCharging.SetActive (true);
+                                DashIcon.SetActive(false);
+                                DashIconCharging.SetActive(true);
 
-						Audio.PlayOneShot(Fireball);
+                                dashState = DashState.Dashing;
+                            }
+                            break;
+                        case DashState.Dashing:
+                            dashTimer += Time.deltaTime * 3;
+                            if (dashTimer >= maxDash)
+                            {
+                                dashTimer = maxDash;
+                                P2Speed = P2savedSpeed;
+                                dashState = DashState.Cooldown;
+                            }
+                            break;
+                        case DashState.Cooldown:
+                            dashTimer -= Time.deltaTime;
+                            if (dashTimer <= 0)
+                            {
+                                dashTimer = 0;
 
-						//instantiate the first bullet
-						GameObject bullet01 = (GameObject)Instantiate (PlayerBulletGO, transform.position, Quaternion.identity);
-						//bullet01.transform.position = bulletPosition01.transform.position; //set the bullet initial postion
+                                DashIcon.SetActive(true);
+                                DashIconCharging.SetActive(false);
 
-						bullet01.GetComponent<PlayerBullet> ().xspeed = -15.0f;
+                                dashState = DashState.Ready;
+                            }
+                            break;
+                    }
 
-						shootState = ShootState.Shooting;
-					}
-					break;
-				case ShootState.Shooting:
-					shootTimer += Time.deltaTime * 3;
-					if (shootTimer >= maxShoot) 
-					{
-						shootTimer = maxShoot;
+                }
 
-						shootState = ShootState.Cooldown;
-					}
-					break;
-				case ShootState.Cooldown:
-					shootTimer -= Time.deltaTime;
-					if (shootTimer <= 0) 
-					{
-						shootTimer = 0;
+                if (shield == true)
+                {
+                    switch (shieldState)
+                    {
+                        case P2ShieldState.Ready:
+                            var P2ShieldKeyDown = prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed;
+                            if (P2ShieldKeyDown)
+                            {
+                                P2Shield.SetActive(true);
 
-						BigShotIcon.SetActive (true);
-						BigShotIconCharging.SetActive (false);
+                                ShieldIcon.SetActive(false);
+                                ShieldIconCharging.SetActive(true);
 
-						shootState = ShootState.Ready;
-					}
-					break;
-				}
-			}
+                                shieldState = P2ShieldState.Shielding;
+                            }
+                            break;
+                        case P2ShieldState.Shielding:
+                            shieldTimer += Time.deltaTime * 3;
+                            if (shieldTimer >= maxShield)
+                            {
+                                shieldTimer = maxShield;
+
+                                P2Shield.SetActive(false);
+
+                                shieldState = P2ShieldState.Cooldown;
+                            }
+                            break;
+                        case P2ShieldState.Cooldown:
+                            shieldTimer -= Time.deltaTime;
+                            if (shieldTimer <= 0)
+                            {
+                                shieldTimer = 0;
+
+                                ShieldIcon.SetActive(true);
+                                ShieldIconCharging.SetActive(false);
 
 
+                                shieldState = P2ShieldState.Ready;
+                            }
+                            break;
+                    }
+                }
+
+                if (BigShot == true)
+                {
+                    switch (shootState)
+                    {
+                        case ShootState.Ready:
+                            var P1CloneKeyDown = prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed;
+                            if (P1CloneKeyDown)
+                            {
+
+                                BigShotIcon.SetActive(false);
+                                BigShotIconCharging.SetActive(true);
+
+                                Audio.PlayOneShot(Fireball);
+
+                                //instantiate the first bullet
+                                GameObject bullet01 = (GameObject)Instantiate(PlayerBulletGO, transform.position, Quaternion.identity);
+                                //bullet01.transform.position = bulletPosition01.transform.position; //set the bullet initial postion
+
+                                bullet01.GetComponent<PlayerBullet>().xspeed = -15.0f;
+
+                                shootState = ShootState.Shooting;
+                            }
+                            break;
+                        case ShootState.Shooting:
+                            shootTimer += Time.deltaTime * 3;
+                            if (shootTimer >= maxShoot)
+                            {
+                                shootTimer = maxShoot;
+
+                                shootState = ShootState.Cooldown;
+                            }
+                            break;
+                        case ShootState.Cooldown:
+                            shootTimer -= Time.deltaTime;
+                            if (shootTimer <= 0)
+                            {
+                                shootTimer = 0;
+
+                                BigShotIcon.SetActive(true);
+                                BigShotIconCharging.SetActive(false);
+
+                                shootState = ShootState.Ready;
+                            }
+                            break;
+                    }
+                }
+
+            }
 	
 		}
 

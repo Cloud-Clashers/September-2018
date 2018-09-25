@@ -80,7 +80,7 @@ public class PlayerSelectionP4 : MonoBehaviour
 
 
 
-		if (playerIndex == PlayerIndex.Two) 
+		if (playerIndex == PlayerIndex.Four) 
 		{
 
 			for (int i = 0; i < CharOptions.Length; i++) 
