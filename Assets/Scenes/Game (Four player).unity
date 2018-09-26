@@ -2106,6 +2106,7 @@ GameObject:
   - component: {fileID: 430291828}
   - component: {fileID: 430291831}
   - component: {fileID: 430291830}
+  - component: {fileID: 430291832}
   - component: {fileID: 430291829}
   m_Layer: 5
   m_Name: Timer
@@ -2138,12 +2139,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 430291827}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5f98b2fddbde9249a966b110f7391f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Overtimex: 1000
+  Overtimex: 500
   overtimey: -1000
   startingtime: 60
   Timerp1Round1Win: {fileID: 774663876}
@@ -2272,6 +2273,32 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 430291827}
   m_CullTransparentMesh: 0
+--- !u!114 &430291832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 430291827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d099f9b69885fc34f8d770f042d9de59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Overtimex: 1000
+  overtimey: -1000
+  startingtime: 60
+  Timerp1Round1Win: {fileID: 774663876}
+  Timerp1Round2Win: {fileID: 1944282855}
+  Timerp2Round1Win: {fileID: 224621193}
+  Timerp2Round2Win: {fileID: 1966043164}
+  Timerp3Round1Win: {fileID: 0}
+  Timerp3Round2Win: {fileID: 0}
+  Timerp4Round1Win: {fileID: 0}
+  Timerp4Round2Win: {fileID: 0}
+  P1WinAnimation: {fileID: 306406765}
+  P2WinAnimation: {fileID: 0}
+  P3WinAnimation: {fileID: 0}
+  P4WinAnimation: {fileID: 0}
 --- !u!1 &444439207
 GameObject:
   m_ObjectHideFlags: 0
@@ -2741,15 +2768,15 @@ RectTransform:
   m_GameObject: {fileID: 587039839}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.6971356, y: 1.6971356, z: 1.6971356}
+  m_LocalScale: {x: 1.2401478, y: 1.2401478, z: 1.2401478}
   m_Children: []
   m_Father: {fileID: 178527390}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 504, y: 332}
-  m_SizeDelta: {x: 261.7, y: 90.9}
+  m_AnchoredPosition: {x: -578, y: 332}
+  m_SizeDelta: {x: 517.7, y: 90.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &587039841
 MonoBehaviour:
@@ -2801,7 +2828,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'P1: 0 P2: 0'
+  m_Text: 'P1: 5 P2: 5 P3: 5 P4: 5'
 --- !u!222 &587039843
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4330,7 +4357,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1325376602}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05b52de0f039df54eb76a2565a6951c1, type: 3}
   m_Name: 

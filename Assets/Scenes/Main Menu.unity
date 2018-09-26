@@ -124,8 +124,9 @@ GameObject:
   - component: {fileID: 348170136}
   - component: {fileID: 348170135}
   - component: {fileID: 348170137}
+  - component: {fileID: 348170138}
   m_Layer: 0
-  m_Name: circle
+  m_Name: Navigation Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -139,7 +140,7 @@ Transform:
   m_GameObject: {fileID: 348170133}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -73.1, y: 36.5, z: 0}
-  m_LocalScale: {x: 4.289882, y: 4.289883, z: 4.289883}
+  m_LocalScale: {x: 12.236889, y: 12.236892, z: 12.236892}
   m_Children: []
   m_Father: {fileID: 1597807407}
   m_RootOrder: 0
@@ -194,7 +195,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 2102038097e25394c877767b2aa4e9b7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6b387dd26c300324abaf93ed66f47101, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -300,6 +301,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!95 &348170138
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 348170133}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: aa09c2a94ad0d814ea0cfec03b6559af, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &418712060
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,7 +411,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 532405609}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -200, y: -102, z: 0}
+  m_LocalPosition: {x: -210, y: -102, z: 0}
   m_LocalScale: {x: 32.613125, y: 32.61311, z: 32.61311}
   m_Children:
   - {fileID: 1899661648}
@@ -820,7 +839,7 @@ GameObject:
   - component: {fileID: 1332006112}
   - component: {fileID: 1332006111}
   m_Layer: 5
-  m_Name: Tutorial
+  m_Name: Instructions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -863,9 +882,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 'Tutorial
-
-'
+  m_text: Instructions
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -933,9 +950,9 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1332006111}
-    characterCount: 9
+    characterCount: 12
     spriteCount: 0
-    spaceCount: 1
+    spaceCount: 0
     wordCount: 1
     linkCount: 0
     lineCount: 1

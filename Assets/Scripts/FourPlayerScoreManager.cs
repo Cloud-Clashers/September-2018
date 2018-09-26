@@ -96,7 +96,7 @@ public class FourPlayerScoreManager : MonoBehaviour
     void Update()
     {
 
-        text.text = "P1: " + scoreP1 + " P2: " + scoreP2;
+        text.text = "P1: " + scoreP1 + " P2: " + scoreP2 + " P3: " + scoreP3  + " P4: " + scoreP4;
 
         if (scoreP1 == 0)
         {

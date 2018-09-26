@@ -27,7 +27,9 @@ public class CloudClashersPauseGame : MonoBehaviour
 	void Start()
 	{
 		PauseBackground.SetActive (false);
-	}
+
+        playerIndex = PlayerIndex.One;
+    }
 
 	
 	// Update is called once per frame
@@ -52,17 +54,20 @@ public class CloudClashersPauseGame : MonoBehaviour
 		prevState = state;
 		state = GamePad.GetState(playerIndex);
 
-		if (Input.GetButtonDown ("Pause") ) 
-		{
-			if (paused) 
-			{
-				Resume ();
-			}
-			else 
-			{
-				Pause ();
-			}
-		} 
+       
+         if (prevState.Buttons.Start == ButtonState.Released && state.Buttons.Start == ButtonState.Pressed)
+         {
+             if (paused)
+             {
+                Resume();
+             }
+              else
+              {
+                 Pause();
+              }
+         }
+
+        
 
 		if (Input.GetKeyDown (KeyCode.Escape)) 
 		{
@@ -74,29 +79,34 @@ public class CloudClashersPauseGame : MonoBehaviour
 			{
 				Pause ();
 			}
-		} 
-			
-		if (Input.GetKeyDown (KeyCode.DownArrow) || prevState.DPad.Down == ButtonState.Pressed && state.DPad.Down == ButtonState.Released )
-		{
-			if (menuindex < totalLevels - 1) 
-			{
-				menuindex++;
-				Vector2 Position = transform.position;
-				Position.y -= yOffset;
-				transform.position = Position;
-			}
 		}
 
-		if (Input.GetKeyDown (KeyCode.UpArrow) || prevState.DPad.Up == ButtonState.Pressed && state.DPad.Up == ButtonState.Released )
-		{
-			if (menuindex > 0) 
-			{
-				menuindex--;
-				Vector2 Position = transform.position;
-				Position.y += yOffset;
-				transform.position = Position;
-			}
-		}
+        
+        
+
+        if (prevState.DPad.Down == ButtonState.Pressed && state.DPad.Down == ButtonState.Released)
+        {
+             if (menuindex < totalLevels - 1)
+             {
+                    menuindex++;
+                    Vector2 Position = transform.position;
+                    Position.y -= yOffset;
+                    transform.position = Position;
+             }
+        }
+
+         if (prevState.DPad.Up == ButtonState.Pressed && state.DPad.Up == ButtonState.Released)
+         {
+             if (menuindex > 0)
+             {
+                    menuindex--;
+                    Vector2 Position = transform.position;
+                    Position.y += yOffset;
+                    transform.position = Position;
+             }
+         }
+
+        
 
 		if (menuindex == 0) 
 		{
@@ -142,6 +152,7 @@ public class CloudClashersPauseGame : MonoBehaviour
 		if (paused) 
 		{
 			
+
 			if (Input.GetButtonDown ("P1A") && menuindex == 0) 
 			{
 
@@ -149,20 +160,35 @@ public class CloudClashersPauseGame : MonoBehaviour
 				Resume ();
 
 			}
-			
 
-			if (Input.GetButtonDown ("P1A") && menuindex == 1) 
-			{
-			
-				SceneManager.LoadScene ("Character Select");
-				PlayerSelection.P1Ok = false;
-				PlayerSelectionP2.P2Ok = false;
-				Resume ();
+            if (SceneManager.GetActiveScene().name == "Game (Four player)")
+            {
+                if (Input.GetButtonDown("P1A") && menuindex == 1)
+                {
 
-			}
+                    SceneManager.LoadScene("4 player Character select");
+                    PlayerSelection.P1Ok = false;
+                    PlayerSelectionP2.P2Ok = false;
+                    Resume();
+
+                }
+            }
+
+            if (SceneManager.GetActiveScene().name == "Game")
+            {
+                if (Input.GetButtonDown("P1A") && menuindex == 1)
+                {
+
+                    SceneManager.LoadScene("Character Select");
+                    PlayerSelection.P1Ok = false;
+                    PlayerSelectionP2.P2Ok = false;
+                    Resume();
+
+                }
+            }
 
 
-			if (menuindex == 2) 
+            if (menuindex == 2) 
 			{
 
 

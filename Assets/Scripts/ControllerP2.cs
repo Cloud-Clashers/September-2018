@@ -136,7 +136,7 @@ public class ControllerP2 : MonoBehaviour
 
             }
 
-            if (SceneManager.GetActiveScene().name == "Game (Four player)")
+            if (SceneManager.GetActiveScene().name == "Game")
             {
                 float moveHorizontal = state.ThumbSticks.Left.X * P2Speed * Time.deltaTime;
                 float moveVertical = state.ThumbSticks.Left.Y * P2Speed * Time.deltaTime;

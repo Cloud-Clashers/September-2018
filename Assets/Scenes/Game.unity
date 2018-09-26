@@ -3429,6 +3429,11 @@ Prefab:
       propertyPath: ballrespawn
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 50576050654771168, guid: cdea36b1084d28c46b9222e3ddbc3e1b,
+        type: 2}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdea36b1084d28c46b9222e3ddbc3e1b, type: 2}
   m_IsPrefabAsset: 0
